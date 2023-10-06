@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,8 +9,8 @@ void main() {
       home: Scaffold(
         backgroundColor: Colors.red,
         appBar: AppBar(
-          title: Text("Dice"),
           backgroundColor: Colors.red,
+          title: Text("Dice App"),
         ),
         body: DicePage(),
       ),
@@ -27,8 +27,13 @@ class DicePage extends StatefulWidget {
 
 class _DicePageState extends State<DicePage> {
   var leftDiceNumber = 1;
-  var rightDiceNumber = 4;
+  var rightDiceNumber = 2;
   Random random = Random();
+
+  void randomDiceGenerator() {
+    leftDiceNumber = random.nextInt(6) + 1;
+    rightDiceNumber = random.nextInt(6) + 1;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,7 @@ class _DicePageState extends State<DicePage> {
             child: TextButton(
               onPressed: () {
                 setState(() {
-                  randomise();
+                  randomDiceGenerator();
                 });
               },
               child: Image.asset("images/dice$leftDiceNumber.png"),
@@ -49,7 +54,7 @@ class _DicePageState extends State<DicePage> {
             child: TextButton(
               onPressed: () {
                 setState(() {
-                  randomise();
+                  randomDiceGenerator();
                 });
               },
               child: Image.asset("images/dice$rightDiceNumber.png"),
@@ -58,10 +63,5 @@ class _DicePageState extends State<DicePage> {
         ],
       ),
     );
-  }
-
-  void randomise() {
-    leftDiceNumber = random.nextInt(6) + 1;
-    rightDiceNumber = random.nextInt(6) + 1;
   }
 }
